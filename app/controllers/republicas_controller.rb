@@ -43,7 +43,7 @@ private
   end
 
   def republica_params
-    params.require(:republica).permit(:name, :address, :description, :vacancies, :city)
+    params.require(:republica).permit(:name, :address, :description, :vacancies, :city, photos: [])
   end
 end
 
