@@ -33,7 +33,7 @@ class RepublicasController < ApplicationController
 
   def destroy
     @republica.destroy
-    redirect_to republicas_index
+    redirect_to republicas_path
   end
 
 private

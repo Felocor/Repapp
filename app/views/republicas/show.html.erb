@@ -1,2 +1,8 @@
-<h1>Republicas#show</h1>
-<p>Find me in app/views/republicas/show.html.erb</p>
+<h1>Name: <%=@republica.name%></h1>
+   Address: <%= @republica.address %> <br>
+   Description: <%= @republica.description %> <br>
+   N° vacancies: <%= @republica.vacancies %> <br>
+   User e-mail: <%= @republica.user.email %> <br>
+    <%= link_to 'Back', republicas_path %>
+
+
