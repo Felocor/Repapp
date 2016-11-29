@@ -1,0 +1,16 @@
+<h1>Republicas List</h1>
+<%= link_to "Create a Republica", new_republica_path, class: "btn btn-primary" %>
+<ul>
+<% @republicas.each do |republica| %>
+  <li>
+   <%= republica.name %>
+   <%= republica.address %>
+   <%= republica.vacancies %>
+   <%= link_to "Show", republica_path(republica) %>
+   <%= link_to "Edit", edit_republica_path(republica) %>
+   <%= link_to "Delete", republica_path(republica),
+         method: :delete,
+         data: { confirm: "Are you sure?" } %>
+  </li>
+<% end %>
+</ul>
