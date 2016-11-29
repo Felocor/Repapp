@@ -6,11 +6,28 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Add these line for detecting device width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+
+      <!-- app/views/layouts/application.html.erb.  -->
+      <p>Rodrigo passou por aqui</p>
+      <%= render 'shared/navbar' %>
+
+
+      <!-- app/views/layouts/application.html.erb -->
+      <%= render 'shared/flashes' %>
+
+      <div class="container"
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+     <div>.
   </body>
 </html>
