@@ -1,22 +1,19 @@
 class BookingsController < ApplicationController
 
-    before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_republica, only: [:show, :edit]
+  before_action :find_republica, only: [:new, :create, :update, :destroy]
 
-  # GET /bookings
-  # GET /bookings.json
   def index
     @bookings = Booking.all
   end
 
-  # GET /bookings/1
-  # GET /bookings/1.json
   def show
-    @republica = @booking.republica
   end
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    @booking = @republica.bookings.new
   end
 
   # GET /bookings/1/edit
@@ -25,42 +22,45 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
-    @booking = Booking.new(booking_params)
+    @booking = @republica.bookings.new(booking_params)
+    @booking.status = "P"
+    @booking.user = current_user
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      redirect_to republica_bookings_path(@republica), notice: 'Booking was successfully created.'
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /bookings/1
   def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.update(booking_params)
+      redirect_to republica_bookings_path(@republica), notice: 'Booking was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /bookings/1
   def destroy
     @booking.destroy
-    respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to bookings_url, notice: 'Booking was successfully destroyed.'
   end
 
   private
+
+    def find_republica
+      @republica = Republica.find(params[:republica_id])
+
+    end
+
+    def set_republica
+      @republica = @booking.republica
+
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
