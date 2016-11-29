@@ -1,0 +1,11 @@
+<h1>Name: <%=@republica.name%></h1>
+   Address: <%= @republica.address %> <br>
+   Description: <%= @republica.description %> <br>
+   N° vacancies: <%= @republica.vacancies %> <br>
+   User e-mail: <%= @republica.user.email %> <br>
+  <% @republica.photos.each do |photo| %>
+    <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+  <% end %>
+    <%= link_to 'Back', republicas_path %>
+
+
