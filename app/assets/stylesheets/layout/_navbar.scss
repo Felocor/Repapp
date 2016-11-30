@@ -8,6 +8,11 @@
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
+
+  h3{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+  }
 }
 
 /* Optional class to fix the navbar on top */
@@ -129,3 +134,5 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
+
+
