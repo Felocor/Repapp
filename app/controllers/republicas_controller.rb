@@ -7,6 +7,7 @@ class RepublicasController < ApplicationController
   end
 
   def show
+    @republica_coordinates = { lat: @republica.latitude, lng: @republica.longitude }
   end
 
   def new
