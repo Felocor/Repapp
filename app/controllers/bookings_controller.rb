@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
 
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :set_republica, only: [:show, :edit]
+  before_action :set_republica, only: [:show, :edit, :index]
   before_action :find_republica, only: [:new, :create, :update, :destroy]
 
   def index
@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
-      redirect_to republica_bookings_path(@republica), notice: 'Booking was successfully created.'
+      redirect_to user_booking_list_path(@booking.id, @booking.republica), notice: 'Booking was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   def update
     if @booking.update(booking_params)
-      redirect_to republica_bookings_path(@republica), notice: 'Booking was successfully updated.'
+      redirect_to user_booking_list_path(@booking.id, @booking.republica), notice: 'Booking was successfully updated.'
     else
       render :edit
     end
@@ -49,6 +49,11 @@ class BookingsController < ApplicationController
       redirect_to bookings_url, notice: 'Booking was successfully destroyed.'
   end
 
+  def list_users
+    @user = User.find(current_user)
+    @bookings = @user.bookings
+  end
+
   private
 
     def find_republica
@@ -57,6 +62,7 @@ class BookingsController < ApplicationController
     end
 
     def set_republica
+
       @republica = @booking.republica
 
     end

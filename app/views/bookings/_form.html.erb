@@ -1,6 +1,10 @@
 <%= simple_form_for [@republica, @booking] do |f| %>
   <%= f.error_notification %>
 
+  <h2>Republica: </h2>
+  <h2><% @booking.republica.name %></h2>
+  <br>
+
   <div class="form-inputs">
     <%= f.input :check_in %>
   </div>
