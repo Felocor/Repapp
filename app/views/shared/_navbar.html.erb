@@ -1,24 +1,25 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "149053.svg", height: "35", width: "35" %>
+    <%= image_tag "149053.svg" %>
   <% end %>
-
-
-
-  <h3><%="RepApp....Find your home"%></h3>
-
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
     <!-- Search form -->
+    <form action="" class="navbar-wagon-search">
+      <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
+      <button type="submit" class="navbar-wagon-search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
 
       <!-- Notification -->
-      <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
+      <%= link_to root_path, class: "navbar-wagon-item navbar-wagon-link" do %>
         <div class="badge-container">
           <i class="fa fa-envelope-o"></i>
           <div class="badge badge-blue">3</div>
@@ -28,26 +29,16 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "30856.svg", class: "dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown", height: "35", width: "35" %>
+          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to edit_user_registration_path do %>
+              <%= link_to "#" do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
             </li>
             <li>
-              <%= link_to republicas_path do %>
-                <i class="fa fa-home"></i>  <%= t(".profile", default: "My republics") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_republica_path do %>
-                <i class="fa fa-plus"></i>  <%= t(".profile", default: "Add a republic") %>
-              <% end %>
-            </li>
-            <li>
               <%= link_to "#" do %>
-                <i class="fa fa-bed"></i>  <%= t(".profile", default: "My bookings") %>
+                <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
               <% end %>
             </li>
             <li>
@@ -66,7 +57,8 @@
 
     <% end %>
 
-
+    <!-- Button (call-to-action) -->
+    <%= link_to t(".top_call_to_action", default: "Add a republica"), new_republica_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
@@ -81,3 +73,4 @@
     </div>
   </div>
 </div>
+

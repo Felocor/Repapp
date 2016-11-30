@@ -3,7 +3,7 @@ class RepublicasController < ApplicationController
 
   def index
     @republicas = Republica.all
-    #Republica.where(city:params[:city])
+    # Republica.where(city: params[:city])
   end
 
   def show
