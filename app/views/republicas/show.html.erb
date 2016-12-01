@@ -19,7 +19,7 @@
       <%= @republica.zip_code %> <br>
       <%= @republica.city %>, <%= @republica.country %>  <br>
       N° vacancies: <%= @republica.vacancies %> <br>
-      User e-mail: <%= @republica.user.email %> <br>
+      <%= link_to "Perfil do usuario", user_path(@republica.user), {class: "btn btn-green"} %>
 
       <!Box Photos------------------->
       <div class="media-section">
@@ -114,6 +114,4 @@
     </div>
   </div>
   </div>
-
-  <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
 
