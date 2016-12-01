@@ -12,7 +12,7 @@ class RepublicasController < ApplicationController
     end
   end
 
-  def user_index
+  def user_republicas
     @republicas = current_user.republicas
   end
 
