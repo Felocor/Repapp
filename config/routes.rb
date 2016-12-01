@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # Root path
   root to: "pages#home"
 
+  # User profile
+  get '/user/:id', to: 'pages#user', as: 'user'
+
   # User's bookings path
   get '/user/:id/list_users', to: 'bookings#list_users', as: 'user_booking_list'
 
