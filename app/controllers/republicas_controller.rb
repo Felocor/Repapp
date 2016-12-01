@@ -4,10 +4,23 @@ class RepublicasController < ApplicationController
   def index
     @republicas = Republica.all
     # Republica.where(city: params[:city])
+    @republicas = Republica.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@republicas) do |republica, marker|
+      marker.lat republica.latitude
+      marker.lng republica.longitude
+      # marker.infowindow render_to_string(partial: "/republicas/map_box", locals: { flat: flat })
+    end
+
   end
 
   def show
     @republica_coordinates = { lat: @republica.latitude, lng: @republica.longitude }
+    @hash = Gmaps4rails.build_markers(@republica) do |republica, marker|
+      marker.lat republica.latitude
+      marker.lng republica.longitude
+      # marker.infowindow render_to_string(partial: "/republicas/map_box", locals: { flat: flat })
+    end
   end
 
   def new
