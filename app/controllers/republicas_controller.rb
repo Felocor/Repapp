@@ -2,8 +2,6 @@ class RepublicasController < ApplicationController
   before_action :find_republica, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = User.find(current_user)
-    @republicas = @user.republicas
     # Republica.where(city: params[:city])
     @republicas = Republica.where.not(latitude: nil, longitude: nil)
 
@@ -12,7 +10,10 @@ class RepublicasController < ApplicationController
       marker.lng republica.longitude
       # marker.infowindow render_to_string(partial: "/republicas/map_box", locals: { flat: flat })
     end
+  end
 
+  def user_index
+    @republicas = current_user.republicas
   end
 
   def show
