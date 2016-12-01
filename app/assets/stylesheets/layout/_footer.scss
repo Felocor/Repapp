@@ -1,8 +1,8 @@
 .footer {
-  background-color: gray;
+  background-color: $rep-blue;
   padding: 20px 0;
   color: white;
-  border-top: 10px solid red;
+  // border-top: 10px solid red;
   font-size: 10px;
   a i {
     font-size: 30px;
@@ -10,11 +10,15 @@
     color: white;
     transition: .3s;
     &:hover{
-      color: red;
+      color: $rep-green;
     }
   }
+  i {
+    color: $rep-green;
+  }
   p {
+    margin-top: 10px;
     font-size: 14px;
-    font-style: $header-font;
+    font-weight: 300;
   }
 }
