@@ -3,9 +3,44 @@
    Description: <%= @republica.description %> <br>
    N° vacancies: <%= @republica.vacancies %> <br>
    User e-mail: <%= @republica.user.email %> <br>
+   <br>
+
   <% @republica.photos.each do |photo| %>
     <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %> <br>
   <% end %>
   <br>
-    <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
-    <%= link_to "Book!", new_republica_booking_path(@republica), class: "btn btn-primary" %> <br>
+  <div class='container'>
+    <table>
+      <thead>
+      <tr>
+        <th>Email</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+      <br>
+
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td style="width:300px"><%= booking.user.email %></td>
+            <td style="width:150px"><%= booking.check_in %></td>
+            <td style="width:150px"><%= booking.check_out %></td>
+            <td style="width:100px"><%= booking.status %></td>
+            <% if booking.status == 'P' %>
+              <td style="width:100px"><%= link_to 'Confirm', confirm_booking_path(booking) %></td>
+            <% end %>
+            <% if booking.status != 'R' %>
+              <td style="width:100px"><%= link_to 'Reject', reject_booking_path(booking) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  <br>
+  <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>

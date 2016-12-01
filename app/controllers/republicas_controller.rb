@@ -2,12 +2,14 @@ class RepublicasController < ApplicationController
   before_action :find_republica, only: [:show, :edit, :update, :destroy]
 
   def index
-    @republicas = Republica.all
+    @user = User.find(current_user)
+    @republicas = @user.republicas
     # Republica.where(city: params[:city])
   end
 
   def show
     @republica_coordinates = { lat: @republica.latitude, lng: @republica.longitude }
+    @bookings = @republica.bookings
   end
 
   def new

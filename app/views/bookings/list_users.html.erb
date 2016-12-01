@@ -13,13 +13,13 @@
     <tbody>
       <% @bookings.each do |booking| %>
         <tr>
-          <td><%= booking.republica.name %> - </td>
-          <td><%= booking.republica.address %> - </td>
-          <td><%= booking.check_in %> - </td>
-          <td><%= booking.check_out %> - </td>
-          <td><%= booking.status %> - </td>
-          <td><%= link_to 'Edit', edit_republica_booking_path(booking) %> | </td>
-          <td><%= link_to 'Cancel', edit_republica_booking_path(booking) %> | </td>
+          <td style="width:300px"><%= booking.republica.name %></td>
+          <td style="width:300px"><%= booking.republica.address %></td>
+          <td style="width:100px"><%= booking.check_in %></td>
+          <td style="width:100px"><%= booking.check_out %></td>
+          <td style="width:100px"><%= booking.status %></td>
+          <td style="width:100px"><%= link_to 'Edit', edit_republica_booking_path(booking) %></td>
+          <td style="width:100px"><%= link_to 'Cancel', edit_republica_booking_path(booking) %></td>
         </tr>
       <% end %>
     </tbody>
