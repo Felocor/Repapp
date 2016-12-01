@@ -30,3 +30,15 @@
 
 .carousel{width:450px;
        height:300px;}
+
+.showsocial{
+  a i {
+    padding-right: 1px;
+      font-size: 25px;
+      color: $rep-green;
+      transition: .3s;
+      &:hover{
+        color: $orange;
+      }
+   }
+ }
