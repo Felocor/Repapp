@@ -1,27 +1,33 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="box-large-white">
+  <h2 class="text-center">Editar perfil</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
-  </div>
+      <%= f.input :password, label: "Nova senha", autocomplete: "off", hint: "deixar vazio para nao mudar a senha", required: false %>
+      <%= f.input :password_confirmation, label: "Confirmar senha", required: false %>
+      <%= f.input :current_password, label: "Senha", hint: "precisamos da sua senha para confirmar mudanças", required: true %>
+      <%= f.input :first_name, label: "Nome" %>
+      <%= f.input :last_name, label: "Sobrenome" %>
+      <%= f.input :dob, label: "Data de nascimento" %>
+      <%= f.input :bio, label: "Biographia" %>
+      <%= f.input :interests, label: "Hobbies" %>
+      <%= f.input :photo, as: :attachinary %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Confirmar", class: "btn btn-green btn-block btn-margin"   %>
+    </div>
+  <% end %>
 
-<h3>Cancel my account</h3>
+  <br><p><%= link_to "Fechar conto", registration_path(resource_name), class: "btn btn-default btn-block btn-margin", data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+  <%= link_to "Voltar", :back, class: "btn btn-default btn-block btn-margin"   %>
+</div>

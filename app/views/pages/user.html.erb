@@ -1,0 +1,28 @@
+<div class="user-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+      <div class="left-body text-center">
+        <div class="user-image">
+          <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/70x70" %>
+          <%= image_tag avatar_url, class: "avatar-large" %>
+        </div>
+        <div class="user-info">
+          <h4><%=@user.first_name%> <%=@user.last_name%></h4>
+          <h5><%=Date.today.year - @user.dob.year%> anos</h5>
+          <h5>Repper desde <%=@user.created_at.year%></h5>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="right-body text-center">
+      <h3>Know more about <%=@user.first_name%></h3><br>
+        <h4 class="text-center">Biographia</h4>
+        <%=@user.bio%> <br>
+        <h4 class="text-center">Hobbies</h4>
+        <%=@user.interests%>
+      </div>
+    </div>
+  </div>
+</div>
+

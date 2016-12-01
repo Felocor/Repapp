@@ -1,11 +1,11 @@
 class BookingsController < ApplicationController
 
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :set_republica, only: [:show, :edit, :index]
-  before_action :find_republica, only: [:new, :create, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :confirm_booking, :reject_booking]
+  before_action :set_republica, only: [:show, :edit, :confirm_booking, :reject_booking]
+  before_action :find_republica, only: [:new, :create, :index, :update, :destroy]
 
   def index
-    @bookings = Booking.all
+    @bookings = @republica.bookings
   end
 
   def show
@@ -52,6 +52,30 @@ class BookingsController < ApplicationController
   def list_users
     @user = User.find(current_user)
     @bookings = @user.bookings
+  end
+
+  def confirm_booking
+    if @republica.vacancies == 0
+      redirect_to republica_path(@booking.republica_id), notice: 'No bed available.'
+    end
+
+    @booking.republica.vacancies -= 1
+    @republica.save
+    @booking.status = "A"
+    @booking.save
+    redirect_to republica_path(@booking.republica_id), notice: 'Booking acceped.'
+  end
+
+  def reject_booking
+    if @booking.status == "A"
+
+      @booking.republica.vacancies += 1
+      @republica.save
+    end
+
+    @booking.status = "R"
+    @booking.save
+    redirect_to republica_path(@booking.republica_id), notice: 'Booking Rejected.'
   end
 
   private
