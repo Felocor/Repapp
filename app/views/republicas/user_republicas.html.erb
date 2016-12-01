@@ -1,0 +1,22 @@
+<% if @republicas %>
+  <div class="republicas-container">
+  <% @republicas.each do |republica| %>
+    <div class="republica-line">
+      <div class="republica-image">
+        <%= cl_image_tag republica.photos[0].path, class: 'republica-image-medium' %>
+      </div>
+      <div class="republica-content text-center">
+        <strong><%= republica.name %> </strong> <br>
+        Cidade: <%= republica.city %>
+      </div>
+      <div class="republica-actions text-center">
+        <%= link_to "Mostrar bookings", republica_bookings_path(republica), class: "btn btn-green"  %>
+        <%= link_to "Mostrar republica", republica_path(republica), class: "btn btn-default"  %>
+        <%= link_to "Editar", edit_republica_path(republica), class: "btn btn-default"  %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<% else %>
+  <h3>Voce ainda nao tem republicas no site!</h3>
+<% end %>
