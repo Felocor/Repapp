@@ -1,33 +1,100 @@
-<h1>Name: <%=@republica.name%></h1>
-   Address: <%= @republica.address %> <br>
-   Description: <%= @republica.description %> <br>
-   N° vacancies: <%= @republica.vacancies %> <br>
-   User e-mail: <%= @republica.user.email %> <br>
-  <% @republica.photos.each do |photo| %>
-    <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %> <br>
-  <% end %>
-  <br>
-    <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
-    <%= link_to "Book!", new_republica_booking_path(@republica), class: "btn btn-primary" %> <br>
+<div class="gray-wrapper">
+  <div class="container">
+  <div class="media">
+    <div class="media-body">
 
-<div id="map" style="width: 100%; height: 600px;"></div>
+    <!Information Republica--------->
+      <h3><%=@republica.name%></h3>
+      Address: <%= @republica.address %> <br>
+      <%= @republica.zip_code %> <br>
+      <%= @republica.city %>, <%= @republica.country %>  <br>
+      N° vacancies: <%= @republica.vacancies %> <br>
+      User e-mail: <%= @republica.user.email %> <br>
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-  <% end %>
-<% end %>
+      <!Box Photos------------------->
+      <div class="media-section">
+        <h3>Pictures</h3>
+
+      <!Caroussel------------------->
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+
+          <div class="carousel-inner" role="listbox">
+            <% @republica.photos.each do |photo| %>
+            <div class="carousel-item">
+                    <%= cl_image_tag photo.path, crop: :fill %> <br>
+                  <% end %>
+            </div>
+
+          </div>
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="icon-prev" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="icon-next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="media-section">
+        <h3>Description</h3>
+        Description: <%= @republica.description %>
+      </div>
+    </div>
+
+    <div class="media-aside">
+    <div class="media-section">
+        <h3>Localisation</h3>
+            <div id="map" style="width: 100%; height: 400px;"></div>
+
+              <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+              $(document).ready(function() {
+              var handler = Gmaps.build('Google');
+              handler.buildMap({ internal: { id: 'map' } }, function() {
+              markers = handler.addMarkers(<%= raw @hash.to_json %>);
+              handler.bounds.extendWith(markers);
+              handler.fitMapToBounds();
+              if (markers.length == 0) {
+                handler.getMap().setZoom(2);
+              } else if (markers.length == 1) {
+                handler.getMap().setZoom(14);
+              }
+            });
+          });
+        <% end %>
+      <% end %>
+      </div>
+      <div class="media-section">
+
+      <ul class="list-inline">
+        <h3>View profile's current tenants</h3>
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+
+      </ul>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
 
 
