@@ -1,0 +1,14 @@
+.btn-search {
+  width: 100px;
+  height: 40px;
+  color: white;
+  background-color: $rep-green;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  transition:.3s;
+}
+
+.btn-seach:hover {
+  background-color: #3ac162;
+}
