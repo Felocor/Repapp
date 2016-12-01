@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20161201135048) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +54,8 @@ ActiveRecord::Schema.define(version: 20161201135048) do
     t.string   "city"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "zip_code"
+    t.string   "country"
     t.index ["user_id"], name: "index_republicas_on_user_id", using: :btree
   end
 

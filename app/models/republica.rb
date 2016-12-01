@@ -5,9 +5,11 @@ class Republica < ApplicationRecord
 
 
   validates :address, presence: true
+ # validates :zip_code, presence: true
   validates :description, presence: true
   validates :vacancies, presence: true
   validates :city, presence: true
+ # validates :country, presence: true
   validates :name, presence: true, uniqueness: {scope: :city}
   validates :photos, presence: true
 

@@ -1,7 +1,9 @@
 <%= simple_form_for(@republica) do |f| %>
   <%= f.input :name, placeholder: "Rep 77" %>
   <%= f.input :address, placeholder: "Rua Catipara" %>
+  <%= f.input :zip_code, placeholder: "01446-020" %>
   <%= f.input :city, placeholder: "Sao Paulo" %>
+  <%= f.input :country, placeholder: "Brazil", as: :text %>
   <%= f.input :description, placeholder: "Fun and confortable" %>
   <%= f.input :vacancies, placeholder: "3" %>
   <%= f.input :photos, as: :attachinary %>
