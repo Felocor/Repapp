@@ -5,7 +5,17 @@
 
     <!Information Republica--------->
       <h3><%=@republica.name%></h3>
-      Address: <%= @republica.address %> <br>
+      <div class="showsocial">
+      <ul  class="list-inline">
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+    </ul>
+    </div>
+
+
+      Address: <%= @republica.address %>
       <%= @republica.zip_code %> <br>
       <%= @republica.city %>, <%= @republica.country %>  <br>
       N° vacancies: <%= @republica.vacancies %> <br>
@@ -55,7 +65,7 @@
     <div class="media-aside">
     <div class="media-section">
         <h3>Localisation</h3>
-            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div id="map" style="width: 100%; height: 300px;"></div>
 
               <% content_for(:after_js) do %>
               <%= javascript_tag do %>
@@ -78,53 +88,32 @@
       <div class="media-section">
 
       <ul class="list-inline">
-        <h3>View profile's current tenants</h3>
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
+        <h4>View profile's current tenants</h4>
 
-      </ul>
+        <% @bookings.each do |booking| %>
+          <%= booking.user.email%> , <%=booking.user.last_name %>
+        <%end%>
+    <br>
+    <br>
+
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+        <li>
+          <img src="" alt="user" class="avatar">
+        </li>
+        </ul>
+      </div>
+      <div class="media-section">
+      <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
+      <%= link_to 'Book', new_republica_booking_path(@republica), class: "btn btn-primary"  %>
       </div>
     </div>
   </div>
   </div>
-    <div class="container">
-      <table>
-        <thead>
-        <tr>
-          <th>Email</th>
-          <th>Check-in</th>
-          <th>Check-out</th>
-          <th>Status</th>
-          <th colspan="3"></th>
-        </tr>
-        </thead>
-        <br>
-        <tbody>
-          <% @bookings.each do |booking| %>
-            <tr>
-              <td style="width:300px"><%= booking.user.email %></td>
-              <td style="width:150px"><%= booking.check_in %></td>
-              <td style="width:150px"><%= booking.check_out %></td>
-              <td style="width:100px"><%= booking.status %></td>
-              <% if booking.status == 'P' %>
-                <td style="width:100px"><%= link_to 'Confirm', confirm_booking_path(booking) %></td>
-              <% end %>
-              <% if booking.status != 'R' %>
-                <td style="width:100px"><%= link_to 'Reject', reject_booking_path(booking) %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+
   <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
 
