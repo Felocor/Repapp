@@ -2,7 +2,7 @@ class RepublicasController < ApplicationController
   before_action :find_republica, only: [:show, :edit, :update, :destroy]
 
   def index
-    # Republica.where(city: params[:city])
+    @results = Republica.where(city: params[:city])
     @republicas = Republica.where.not(latitude: nil, longitude: nil)
 
     @hash = Gmaps4rails.build_markers(@republicas) do |republica, marker|
