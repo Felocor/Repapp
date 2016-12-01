@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/republica/:id/booking/:id/confirm_booking', to: 'bookings#confirm_booking', as: 'confirm_booking'
   get '/republica/:id/booking/:id/reject_booking', to: 'bookings#reject_booking', as: 'reject_booking'
 
+  # List of a user's republicas
+  get '/republicas/user_republicas', to: 'republicas#user_republicas', as: 'user_republicas'
   # FaceBook connect callback
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
