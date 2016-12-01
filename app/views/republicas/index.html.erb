@@ -1,21 +1,43 @@
-<h1>Republicas List</h1>
+<div class="index-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <div class="box-generic">
+        <% word = @results.length >= 2 ? 's' : '' %>
+        <h3 class="text-center"><%= @results.length %> resultado<%= word %> de republicas em <%= params[:city] %></h3>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+      <div class="republica-filter box-generic">
+        <h3 class="text-center">Filters</h3 class="text-center">
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+      <div class="search-results box-generic">
+        <ul>
+        <% @results.each do |republica| %>
+          <li>
+           <%= republica.name %>
+           <%= republica.address %>
+           <%= republica.vacancies %>
+           <%= link_to "Show", republica_path(republica) %>
+           <%= link_to "Edit", edit_republica_path(republica) %>
+           <%= link_to "Delete", republica_path(republica),
+                 method: :delete,
+                 data: { confirm: "Are you sure?" } %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-<ul>
-<% @republicas.each do |republica| %>
-  <li>
-   <%= republica.name %>
-   <%= republica.address %>
-   <%= republica.vacancies %>
-   <%= link_to "Show", republica_path(republica) %>
-   <%= link_to "Edit", edit_republica_path(republica) %>
-   <%= link_to "Delete", republica_path(republica),
-         method: :delete,
-         data: { confirm: "Are you sure?" } %>
-  </li>
-<% end %>
-</ul>
 
-<div id="map" style="width: 100%; height: 600px;"></div>
+
+<div id="map" style="width: 100%; height: 300px;"></div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
