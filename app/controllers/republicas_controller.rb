@@ -1,5 +1,6 @@
 class RepublicasController < ApplicationController
   before_action :find_republica, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @results = Republica.where(city: params[:city])
