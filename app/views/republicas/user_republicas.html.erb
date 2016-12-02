@@ -3,7 +3,9 @@
   <% @republicas.each do |republica| %>
     <div class="republica-line">
       <div class="republica-image">
+      <% if republica.photos.first.present? %>
         <%= cl_image_tag republica.photos[0].path, width: 250, height: 150, crop: :fill %>
+      <% end %>
       </div>
       <div class="republica-content text-center">
         <strong><%= republica.name %> </strong> <br>
