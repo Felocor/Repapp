@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Repapp</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -14,9 +13,8 @@
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
     <%= javascript_include_tag "application" %>
-    <%= cloudinary_js_config %> <!-- Append this after the main `javascript_include_tag`. -->
+    <%= cloudinary_js_config %>
   </head>
-
   <body>
     <%= render "shared/navbar" %>
     <%= render 'shared/flashes' %>
