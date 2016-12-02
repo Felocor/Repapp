@@ -1,39 +1,37 @@
-<h1>Your's Booking List</h1>
+
 <div class='container'>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Check-in</th>
-        <th>Check-out</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <br>
+  <h1><strong>Your's Booking List</strong></h1>
 
-    <tbody>
+  <% if @bookings %>
+    <div class="republica-container">
       <% @bookings.each do |booking| %>
-        <tr>
-          <td style="width:300px"><%= booking.republica.name %></td>
-          <td style="width:300px"><%= booking.republica.address %></td>
-          <td style="width:100px"><%= booking.check_in %></td>
-          <td style="width:100px"><%= booking.check_out %></td>
-          <td style="width:100px"><%= booking.status %></td>
-          <% if booking.status != "A" %>
-            <td style="width:100px"><%= link_to 'Edit', edit_republica_booking_path(booking.republica, booking), class: "btn btn-primary" %></td>
-          <% end %>
-          <% if booking.status != "C" %>
-              <td style="width:100px"><%= link_to 'Cancel', cancel_republica_booking_path(booking.republica, booking), class: "btn btn-default"%></td>
+        <div class="republica-line">
+          <div class="republica-image">
+              <%= cl_image_tag booking.republica.photos[0].path, width: 250, height: 150, crop: :fill %>
+          </div>
+          <div class="republica-content text-center">
+            <strong><%= booking.republica.name %> <br>
+             <%= booking.republica.address %></strong> <br>
+            Check-in: <%= booking.check_in %><br>
+            Check-out: <%= booking.check_out %><br>
+            Status: <%= booking.status %><br>
+          </div>
+
+          <div class="republica-actions text-center">
+            <% if booking.status != "A" %>
+            <%= link_to 'Edit', edit_republica_booking_path(booking.republica, booking), class: "btn btn-primary" %>
             <% end %>
-        </tr>
+            <% if booking.status != "C" %>
+              <%= link_to 'Cancel', cancel_republica_booking_path(booking.republica, booking), class: "btn btn-default"%>
+            <% end %>
+
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  <% end %>
+  <br>
+
+  <%= link_to 'Back', root_path %> |
 </div>
-
-<br>
-
-<%= link_to 'Back', root_path %> |
-
 
