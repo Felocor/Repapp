@@ -1,7 +1,6 @@
 <%= simple_form_for [@republica, @booking] do |f| %>
   <%= f.error_notification %>
-  <%= f.input :check_in %>
-  <%= f.input :check_out %>
+  <%= f.input :check_in, as: :string, input_html: { "data-provide" => 'datepicker' } %>
+  <%= f.input :check_out, as: :string, input_html: { "data-provide" => 'datepicker' } %>
   <%= f.button :submit, class: "btn btn-block btn-green" %>
 <% end %>
-
