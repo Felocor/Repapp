@@ -3,7 +3,7 @@ class RepublicasController < ApplicationController
 
   def index
     @results = Republica.where(city: params[:city])
-    @republicas = Republica.where.not(latitude: nil, longitude: nil)
+    @republicas = Republica.where.not(latitude: nil, longitude: nil).where(city: params[:city])
 
     @hash = Gmaps4rails.build_markers(@republicas) do |republica, marker|
       marker.lat republica.latitude
