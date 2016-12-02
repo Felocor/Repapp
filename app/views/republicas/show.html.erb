@@ -1,117 +1,142 @@
 <div class="gray-wrapper">
   <div class="container">
-  <div class="media">
-    <div class="media-body">
+    <div class="media">
 
-    <!Information Republica--------->
-      <h3><%=@republica.name%></h3>
-      <div class="showsocial">
-      <ul  class="list-inline">
-      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-    </ul>
-    </div>
+      <div class="media-body">
+      <!--Information Republica-->
+        <h3><%=@republica.name%></h3>
+        <div class="showsocial">
+          <ul  class="list-inline">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        Address: <%= @republica.address %>
+        <%= @republica.zip_code %> <br>
+        <%= @republica.city %>, <%= @republica.country %>
+        <br>
+        <br>
+        N° vacancies: <%= @republica.vacancies %>
+        <div class="media-section">
+          <%= link_to "Perfil do usuario", user_path(@republica.user), {class: "btn btn-green"} %>
+        </div>
+          <!--Box Photos-->
+        <div class="media-section">
+          <h3>Galeria</h3>
 
+          <!--Caroussel-->
+          <div id="carousel-example-generic" class="carousel slide">
 
-      Address: <%= @republica.address %>
-      <%= @republica.zip_code %> <br>
-      <%= @republica.city %>, <%= @republica.country %>  <br>
-      N° vacancies: <%= @republica.vacancies %> <br>
-      <%= link_to "Perfil do usuario", user_path(@republica.user), {class: "btn btn-green"} %>
-
-      <!Box Photos------------------->
-      <div class="media-section">
-        <h3>Pictures</h3>
-
-      <!Caroussel------------------->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-          </ol>
-
-          <div class="carousel-inner" role="listbox">
-            <% @republica.photos.each do |photo| %>
-            <div class="carousel-item">
-                    <%= cl_image_tag photo.path, crop: :fill %> <br>
+            <ol class="carousel-indicators">
+              <% @republica.photos.each_with_index do |photo,index| %>
+                <div class="item ">
+                  <% if index == 0 %>
+                     <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class="active"></li>
+                  <% else %>
+                    <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
                   <% end %>
+                </div>
+              <% end %>
+
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+
+
+
+              <% @republica.photos.each_with_index do |photo,index| %>
+                <% if index == 0 %>
+                  <div class="item active">
+                    <%= cl_image_tag photo.path%>
+                  </div>
+                <% else %>
+                  <div class="item">
+                    <%= cl_image_tag photo.path%>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
 
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="icon-prev" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="icon-next" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="icon-prev" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="icon-next" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
 
-
+        <div class="media-section">
+          <h3>Description</h3>
+          Description: <%= @republica.description %>
+        </div>
       </div>
 
-
-
-      <div class="media-section">
-        <h3>Description</h3>
-        Description: <%= @republica.description %>
-      </div>
-    </div>
-
-    <div class="media-aside">
-    <div class="media-section">
-        <h3>Localisation</h3>
-            <div id="map" style="width: 100%; height: 300px;"></div>
-
-              <% content_for(:after_js) do %>
-              <%= javascript_tag do %>
+      <div class="media-aside">
+        <div class="media-section">
+          <h3>Localização</h3>
+          <div id="map" style="width: 100%; height: 300px;"></div>
+          <% content_for(:after_js) do %>
+            <%= javascript_tag do %>
               $(document).ready(function() {
-              var handler = Gmaps.build('Google');
-              handler.buildMap({ internal: { id: 'map' } }, function() {
-              markers = handler.addMarkers(<%= raw @hash.to_json %>);
-              handler.bounds.extendWith(markers);
-              handler.fitMapToBounds();
-              if (markers.length == 0) {
-                handler.getMap().setZoom(2);
-              } else if (markers.length == 1) {
-                handler.getMap().setZoom(14);
-              }
-            });
-          });
-        <% end %>
-      <% end %>
-      </div>
-      <div class="media-section">
+                var handler = Gmaps.build('Google');
+                handler.buildMap({ internal: { id: 'map' } }, function() {
+                  markers = handler.addMarkers(<%= raw @hash.to_json %>);
+                  handler.bounds.extendWith(markers);
+                  handler.fitMapToBounds();
+                  if (markers.length == 0) {
+                    handler.getMap().setZoom(2);
+                  } else if (markers.length == 1) {
+                    handler.getMap().setZoom(14);
+                  }
+                });
+              });
+            <% end %>
+          <% end %>
+        </div>
+        <div class="media-section">
 
-      <ul class="list-inline">
-        <h4>View profile's current tenants</h4>
+          <h4>Olha perfils dos moradores</h4>
+          <ul class="list-inline">
+            <% @bookings.each do |booking| %>
+              <li>
+                <% if booking.user.photo? %>
+                    <%= link_to user_path(booking.user) do %>
+                      <%= cl_image_tag avatar_image(booking.user), width: 100, height: 100, crop: :fill, class:"avatar" %>
+                      <% end %>
+                    <%else%>
+                      <% if booking.user.facebook_picture_url? %>
+                          <%= link_to user_path(booking.user) do %>
+                          <%= cl_image_tag avatar_image(booking.user), width: 60, height: 60, crop: :fill, class:"avatar" %>
+                            <% end %>
+                      <% end %>
+                  <% end %>
+              </li>
+            <%end%>
+          <br>
+          <br>
+          </ul>
 
-        <% @bookings.each do |booking| %>
-          <%= booking.user.email%> , <%=booking.user.last_name %>
-        <%end%>
-    <br>
-    <br>
-
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
-        <li>
-          <img src="" alt="user" class="avatar">
-        </li>
-        </ul>
-      </div>
-      <div class="media-section">
-      <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
-      <%= link_to 'Book', new_republica_booking_path(@republica), class: "btn btn-primary"  %>
+        </div>
+        <div class="media-section">
+          <%= link_to 'Back', republicas_path, class: "btn btn-primary"  %>
+          <%= link_to 'Book', new_republica_booking_path(@republica), class: "btn btn-green"  %>
+        </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
+
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      $('.carousel').carousel();
+    });
+  <% end %>
+<% end %>
 
