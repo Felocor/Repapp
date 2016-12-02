@@ -1,0 +1,41 @@
+<div class='container'>
+  <h1>Republic's Booking List</h1>
+  <br>
+  <p> Vacancies: <%= @republica.vacancies %></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <br>
+
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td style="width:300px"><%= booking.user.first_name %>  </td>
+          <td style="width:300px"><%= booking.user.last_name %></td>
+          <td style="width:100px"><%= booking.check_in %></td>
+          <td style="width:100px"><%= booking.check_out %></td>
+          <td style="width:100px"><%= booking.status %></td>
+          <% if booking.status == "P" %>
+            <td style="width:100px"><%= link_to 'Confirm', confirm_republica_booking_path(booking.republica, booking) %></td>
+            <td style="width:100px"><%= link_to 'Reject', reject_republica_booking_path(booking.republica, booking) %></td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'Back', root_path %> |
+
+
+
