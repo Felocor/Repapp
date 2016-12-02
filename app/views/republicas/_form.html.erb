@@ -1,11 +1,11 @@
 <%= simple_form_for(@republica) do |f| %>
-  <%= f.input :name, placeholder: "Rep 77" %>
-  <%= f.input :address, placeholder: "Rua Catipara" %>
-  <%= f.input :zip_code, placeholder: "01446-020" %>
-  <%= f.input :city, placeholder: "Sao Paulo" %>
-  <%= f.input :country, placeholder: "Brazil", as: :text %>
-  <%= f.input :description, placeholder: "Fun and confortable" %>
-  <%= f.input :vacancies, placeholder: "3" %>
+  <%= f.input :name, label: "Nome da Republica", placeholder: "Republica do Wagon" %>
+  <%= f.input :address, label: "Rua", placeholder: "Rua Lisboa 890" %>
+  <%= f.input :zip_code, label: "CEP", placeholder: "05413-000" %>
+  <%= f.input :city, label: "Cidade", placeholder: "São Paulo" %>
+  <%= f.input :country, label: "Pais", placeholder: "Brasil", as: :text %>
+  <%= f.input :description, label: "Descrição", placeholder: "Descrição"%>
+  <%= f.input :vacancies, label: "Vagas", placeholder: "1" %>
   <%= f.input :photos, as: :attachinary %>
-  <%= f.button :submit, class: "btn btn-primary"  %>
+  <%= f.button :submit, class: "btn btn-green btn-block"  %>
 <% end %>
