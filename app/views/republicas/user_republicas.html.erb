@@ -3,7 +3,7 @@
   <% @republicas.each do |republica| %>
     <div class="republica-line">
       <div class="republica-image">
-        <%= cl_image_tag republica.photos[0].path, class: 'republica-image-medium' %>
+        <%= cl_image_tag republica.photos[0].path, width: 250, height: 150, crop: :fill %>
       </div>
       <div class="republica-content text-center">
         <strong><%= republica.name %> </strong> <br>
